@@ -10,8 +10,12 @@ import {
     Stack
   } from "@shopify/polaris";
   import { TitleBar, ResourcePicker } from "@shopify/app-bridge-react";
-  import { useState } from "react";
-  import Router from 'next/router'
+  import { useState,useEffect } from "react";
+  import Router from 'next/router';
+  import axios from 'axios'
+
+
+  
   
   
   const img = "https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg";
@@ -27,6 +31,21 @@ import {
     const handleRegister = () => {
       console.log("registro");
     };
+
+    useEffect(() => {
+     // axios.get('/prueba')
+      axios.get('/api/shopify')
+       .then(response =>{
+         console.log('exito',response);
+         
+       }, error=>{
+         console.log(`Error,${error}`);
+         
+       })
+      // .catch(err => alert(`${err}no encontrado`))
+       
+      
+    },[]);
   
     return (
       <Page fullWidth={true}>
@@ -62,7 +81,7 @@ import {
               
               
               
-                  <Button fullWidth={true} onClick={()=> Router.push('/registro')
+                  <Button fullWidth={true} url={'/registro'
                   }>Registro</Button>
               
                 

@@ -1,4 +1,12 @@
-import { Page, FormLayout, TextField, Button } from "@shopify/polaris";
+import {
+  Page,
+  FormLayout,
+  TextField,
+  Button,
+  Layout,
+  Form,
+  Stack,
+} from "@shopify/polaris";
 import React, { useState, useCallback } from "react";
 
 const Registro = () => {
@@ -8,39 +16,54 @@ const Registro = () => {
   const [email, setEmail] = useState();
   const [creditcard, setCreditCard] = useState();
 
-  const handleChange = useCallback(value => setNameStore(value), []);
-
+  const handleChange = useCallback((value) => setNameStore(value), []);
+  const handleSubmit = () => {
+    console.log('datos guardados', nameStore,legal,phone,email, creditcard);
+    
+  };
+  
   return (
-    <Page fullWidth={false}>
-      <FormLayout>
-        <TextField
-          label="Nombre de la tienda"
-          value={nameStore}
-          onChange={useCallback(value => setNameStore(value), [])}
-        />
-        <TextField
-          label="Nombre del representante legal"
-          value={legal}
-          onChange={useCallback(value => setLegal(value), [])}
-        />
-        <TextField
-          label="Telefóno"
-          value={phone}
-          onChange={useCallback(value => setPhone(value), [])}
-        />
-        <TextField
-          type="email"
-          label="Email"
-          value={email}
-          onChange={useCallback(value => setEmail(value), [])}
-        />
-        <TextField
-          label="Tarjeta de crédito"
-          value={creditcard}
-          onChange={useCallback(value => setCreditCard(value), [])}
-        />
-         <Button onClick = {console.log(nameStore,legal,phone, email,creditcard)}>Guardar</Button>
-      </FormLayout>
+    <Page fullWidth title={"Registro"}>
+      <Form onSubmit={handleSubmit}>
+        <FormLayout>
+          <Layout>
+            <Layout.Section oneHalf>
+              <TextField
+                label="Nombre de la tienda"
+                value={nameStore}
+                onChange={(value) => setNameStore(value)}
+              />
+              <TextField
+                label="Nombre del representante legal"
+                value={legal}
+                onChange={(value) => setLegal(value)}
+              />
+              <TextField
+                label="Telefóno"
+                value={phone}
+                onChange={(value) => setPhone(value)}
+              />
+            </Layout.Section>
+            <Layout.Section oneHalf>
+              <TextField
+                type="email"
+                label="Email"
+                value={email}
+                onChange={(value) => setEmail(value)}
+              />
+              <TextField
+                label="Tarjeta de crédito"
+                value={creditcard}
+                onChange={(value) => setCreditCard(value)}
+              />
+
+              <Stack distribution="trailing">
+                <Button submit >Guardar</Button>
+              </Stack>
+            </Layout.Section>
+          </Layout>
+        </FormLayout>
+      </Form>
     </Page>
   );
 };
